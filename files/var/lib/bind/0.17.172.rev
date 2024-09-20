@@ -1,0 +1,15 @@
+$ORIGIN .
+$TTL 907200     ; 1 week 3 days 12 hours
+0.17.172.in-addr.arpa         IN SOA  dns.michaelhaaf.internal. webmaster.michaelhaaf.internal. (
+                                1263529355 ; serial
+                                10800      ; refresh (3 hours)
+                                3600       ; retry (1 hour)
+                                604800     ; expire (1 week)
+                                38400      ; minimum (10 hours 40 minutes)
+                                )
+                        NS      dns.michaelhaaf.internal.
+$ORIGIN 0.17.172.in-addr.arpa.
+1                    PTR       gateway.michaelhaaf.internal.
+4                    PTR       dns.michaelhaaf.internal.
+2                    PTR       pihole.michaelhaaf.internal.
+3                    PTR       mikrotik.michaelhaaf.internal.

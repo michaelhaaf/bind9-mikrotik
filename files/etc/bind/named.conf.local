@@ -1,0 +1,9 @@
+zone "michaelhaaf.internal" {
+	type master;
+	file "/var/lib/bind/michaelhaaf.internal.hosts";
+};
+
+zone "0.17.172.in-addr.arpa" {
+	type master;
+	file "var/lib/bind/0.17.172.rev";
+};

@@ -1,0 +1,24 @@
+options {
+	directory "/var/cache/bind";
+
+	// tells bind to only allow DNS queries from the internal-net ACL in named.conf
+	allow-query { internal-net; };
+
+	// tells bind to only return cached query results to queries coming from the internel-net ACL.
+	allow-query-cache { internal-net; };
+
+	// tells bind to not do recursive lookups for anyone. In other words, this server should only be returning results for hosts over which it is authoritative. This is not intended to be a forwarding or fully recursive resolver.
+	allow-recursion { none; };
+
+	// tells bind not allow any other DNS server to request a zone transfer. If you want to have multiple redundant DNS servers for your LAN, you'd likely want this enabled for an ACL that corresponds to the addresses of your DNS servers so they can do DNS server stuff to each other.
+	allow-transfer { none; };
+
+
+	// The check-names directive tells bind how to respond when its lookups return results that might clash with RFC standards.
+	check-names master ignore;
+	check-names slave ignore;
+	check-names response ignore;
+
+	// The notify directive generates notifications between DNS servers when for e.g. zone files are modified.
+	notify no;
+};
