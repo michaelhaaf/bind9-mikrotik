@@ -22,22 +22,24 @@ If you have not yet created a container on your Mikrotik device, this step is re
 /system/device-mode/update container=yes
 ```
 
-2. Create a veth interface for the container.
+2. Create a bridge for your Mikrotik containers
 
-```
-/interface/veth add name=veth1 address=172.17.0.2/24 gateway=172.17.0.1
-```
-
-Each container on your Mikrotik device needs its own virtual ethernet interface. Here we use the `172.17.0/24` subnet, but this is up to you.
-
-In my case, since I already have Mikrotik containers, I need to use a different address and veth name. The important part is that the `veth` and the `address` are unique to each container.
-
-3. Create a bridge for your Mikrotik containers
+If you have not yet created a bridge for your containers on your Mikrotik device, this step is required. Otherwise you can skip it.
 
 ```
 /interface/bridge add name=containers
 /ip/address add address=172.17.0.1/24 interface=containers
 ```
+
+3. Create a veth interface for the container.
+
+```
+/interface/veth add name=veth1 address=172.17.0.2/24 gateway=172.17.0.1
+```
+
+Each container on your Mikrotik device needs its own virtual ethernet interface. Here we use the `172.17.0/24` subnet, but subnet choice is up to you.
+
+In my case, since I already have Mikrotik containers, I need to use a different address and veth name. The important part is that the `veth` and the `address` are unique to each container.
 
 4. Add `vethN` as a port to that bridge.
 
@@ -45,16 +47,7 @@ In my case, since I already have Mikrotik containers, I need to use a different 
 /interface/bridge/port add bridge=containers interface=veth1
 ```
 
-5. Define mounts for the container as per below.
-
-Define the mounts as per below.
-
-```
-/container mounts add name="etc_dns" src="/usb1/etc/bind" dst="/etc/bind"
-/container mounts add name="var_dns" src="/usb1/var/lib/bind" dst="/var/lib/bind"
-```
-
-6. Create the container
+5. Create the container
 
 The container can be created via the ghcr.io container registry.
 
@@ -64,7 +57,7 @@ Configure the registry URL and add the container.
 /container/config 
 set registry-url=https://ghcr.io tmpdir=usb1/pull
 
-/container add remote-image=michaelhaaf/bind9-mikrotik:main interface=veth1 envlist=dns root-dir=usb1/dns mounts=dns start-on-boot=yes hostname=dns dns=8.8.4.4,8.8.8.8
+/container add remote-image=michaelhaaf/bind9-mikrotik:main interface=veth1 root-dir=usb1/dns start-on-boot=yes hostname=dns
 ```
 
 ### Start the Container
