@@ -23,7 +23,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/username/app
+            ghcr.io/${{ github.repository }}
           tags: |
             type=schedule
             type=ref,event=branch
