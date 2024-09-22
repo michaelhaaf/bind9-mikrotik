@@ -1,6 +1,6 @@
 $ORIGIN .
 $TTL 907200     ; 1 week 3 days 12 hours
-michaelhaaf.internal         IN SOA  bind9.michaelhaaf.internal. webmaster.michaelhaaf.internal. (
+17.19.10.in-addr.arpa         IN SOA  bind9.michaelhaaf.internal. webmaster.michaelhaaf.internal. (
                                 1263529355 ; serial
                                 10800      ; refresh (3 hours)
                                 3600       ; retry (1 hour)
@@ -8,9 +8,6 @@ michaelhaaf.internal         IN SOA  bind9.michaelhaaf.internal. webmaster.micha
                                 38400      ; minimum (10 hours 40 minutes)
                                 )
                         NS      bind9.michaelhaaf.internal.
-$ORIGIN michaelhaaf.internal.
-gateway              A       172.17.0.1
-bind9                A       172.17.0.4
-pihole               A       172.17.0.2
-mikrotik             A       172.17.0.3
-domicile             A       10.19.17.2
+$ORIGIN 17.19.10.in-addr.arpa.
+1                    PTR       gateway.michaelhaaf.internal.
+2                    PTR       domicile.michaelhaaf.internal.

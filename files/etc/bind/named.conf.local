@@ -7,3 +7,8 @@ zone "0.17.172.in-addr.arpa" {
 	type master;
 	file "/var/lib/bind/0.17.172.rev";
 };
+
+zone "17.19.10.in-addr.arpa" {
+	type master;
+	file "/var/lib/bind/17.19.10.rev";
+};
