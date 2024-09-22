@@ -49,9 +49,27 @@ In my case, since I already have Mikrotik containers, I need to use a different 
 
 5. Create the container
 
-The container can be created via the ghcr.io container registry.
+The container can be created either (a) via a `.tar` archive or (b) via the ghcr.io container registry.
 
-Configure the registry URL and add the container.
+a. Build locally to `.tar`, create container
+
+Build the image from the root of this repository. Create the tar and transfer it to your mikrotik:
+
+```
+docker buildx build --no-cache --platform arm64 --output=type=docker -t bind9 .
+docker save bind9 > bind9.tar
+scp bind9.tar user@ip-address:/usb1/images
+```
+
+Then, add the container:
+
+```
+/container add file=usb1/images/bind9.tar interface=veth1 root-dir=usb1/bind9 start-on-boot=yes hostname=bind9 dns=8.8.4.4,8.8.8.8
+```
+
+If you want to see the container output in the router log add `logging=yes` to the container add command.
+
+b. Configure the registry URL and add the container.
 
 ```
 /container/config 

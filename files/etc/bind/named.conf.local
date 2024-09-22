@@ -5,5 +5,5 @@ zone "michaelhaaf.internal" {
 
 zone "0.17.172.in-addr.arpa" {
 	type master;
-	file "var/lib/bind/0.17.172.rev";
+	file "/var/lib/bind/0.17.172.rev";
 };

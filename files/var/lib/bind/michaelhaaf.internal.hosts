@@ -1,15 +1,15 @@
 $ORIGIN .
 $TTL 907200     ; 1 week 3 days 12 hours
-michaelhaaf.internal         IN SOA  dns.michaelhaaf.internal. webmaster.michaelhaaf.internal. (
+michaelhaaf.internal         IN SOA  bind9.michaelhaaf.internal. webmaster.michaelhaaf.internal. (
                                 1263529355 ; serial
                                 10800      ; refresh (3 hours)
                                 3600       ; retry (1 hour)
                                 604800     ; expire (1 week)
                                 38400      ; minimum (10 hours 40 minutes)
                                 )
-                        NS      dns.michaelhaaf.internal.
+                        NS      bind9.michaelhaaf.internal.
 $ORIGIN michaelhaaf.internal.
 gateway              A       172.17.0.1
-dns                  A       172.17.0.4
+bind9                A       172.17.0.4
 pihole               A       172.17.0.2
 mikrotik             A       172.17.0.3
